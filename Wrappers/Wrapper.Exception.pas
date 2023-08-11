@@ -156,7 +156,7 @@ class procedure TExceptionMensagemPadrao.MensagemExcecao(Sender: TObject;
   E: EMessage);
 begin
   var Mensagem := E.Message;
-  TUtilsMessages.ToastMessage(TForm(Application.MainForm), Mensagem, TAlignLayout.Top);
+  TUtilsMessages.ToastMessage(TForm(Application.MainForm), Mensagem, TAlignLayout.Top, $FFB7B11C);
 end;
 
 initialization

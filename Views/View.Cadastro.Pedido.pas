@@ -161,7 +161,7 @@ procedure TViewCadastroPedido.btnAddProdutoClick(Sender: TObject);
 begin
   inherited;
   if not ProdutoInformadoParaAdicao then
-    TUtilsMessages.ToastMessage('Informe o produto a quantidade e o preço.');
+    TUtilsMessages.ToastMessageExcept('Informe o produto a quantidade e o preço.');
 
   AdicionarProdutoNaGride;
   edtCodigoProduto.SetFocus;
@@ -201,7 +201,7 @@ begin
   Var Pedido := TControllerCadastroPedido.New.ObterPedido(ANumeroPedido);
 
   if Pedido.Numero = 0 then
-    TUtilsMessages.ToastMessage('O pedido não foi encontrado!');
+    TUtilsMessages.ToastMessageExcept('O pedido não foi encontrado!');
 
   InicializarCamposDoPedido(Pedido);
   var Cliente := TControllerCadastroPedido.New.ObterCliente(Pedido.IdCliente);
@@ -234,7 +234,7 @@ begin
   Var Pedido := TControllerCadastroPedido.New.ObterPedido(ANumeroPedido);
 
   if Pedido.Numero = 0 then
-    TUtilsMessages.ToastMessage('O pedido não foi encontrado!');
+    TUtilsMessages.ToastMessageExcept('O pedido não foi encontrado!');
 
   ExcluirListaPedidoProdutos(Pedido.Numero);
   TControllerCadastroPedido.New.ExcluirPedido(Pedido);
@@ -270,13 +270,13 @@ end;
 procedure TViewCadastroPedido.ValidarCamposObrigatorios;
 begin
   if edtCodigoCliente.Text.Trim.IsEmpty then
-    TUtilsMessages.ToastMessage('Cliente não informado.');
+    TUtilsMessages.ToastMessageExcept('Cliente não informado.');
 
   if tabProdutos.IsEmpty then
-    TUtilsMessages.ToastMessage('Não existem produtos lançados no pedido.');
+    TUtilsMessages.ToastMessageExcept('Não existem produtos lançados no pedido.');
 
   if edtDataEmissao.Date = 0 then
-    TUtilsMessages.ToastMessage('Data de emissão não informada');
+    TUtilsMessages.ToastMessageExcept('Data de emissão não informada');
 end;
 
 procedure TViewCadastroPedido.GravarPedido;
@@ -328,7 +328,7 @@ begin
   GravarPedido;
   GravarProdutosDoPedido;
   TControllerCadastroPedido.New.Commit;
-  TUtilsMessages.ToastMessage('Pedido excluído!');
+  TUtilsMessages.ToastMessage('Pedido cadastrado!');
   InicializarFormParaCadastro;
 end;
 
@@ -341,7 +341,7 @@ begin
   ViewPesquisa.DisposeOf;
 
   if not Assigned(Cliente) then
-    TUtilsMessages.ToastMessage('Cliente não encontrado!');
+    TUtilsMessages.ToastMessageExcept('Cliente não encontrado!');
 
   PreencherCamposDoCliente(Cliente);
 end;
@@ -372,7 +372,7 @@ begin
   ViewPesquisa.DisposeOf;
 
   if not Assigned(Produto) then
-    TUtilsMessages.ToastMessage('Produto não encontrado!');
+    TUtilsMessages.ToastMessageExcept('Produto não encontrado!');
 
   AdicionarProdutoNaGride(Produto);
   edtCodigoProduto.SetFocus;

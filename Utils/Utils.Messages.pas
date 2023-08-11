@@ -33,6 +33,7 @@ type
       alinhamento: TAlignLayout = TAlignLayout.Bottom; cor_fundo: Cardinal = $FF88A5E6;
       cor_fonte: Cardinal = $FFFFFFFF; duracao: integer = 5); overload;
     class procedure ToastMessage(const AMensagem: string); overload;
+    class procedure ToastMessageExcept(const AMensagem: string); static;
     class function GetDeleteConfirmation(AMessage: String): Boolean;
   end;
 
@@ -171,9 +172,14 @@ begin
   FService := nil;
 end;
 
-class procedure TUtilsMessages.ToastMessage(const AMensagem: string);
+class procedure TUtilsMessages.ToastMessageExcept(const AMensagem: string);
 begin
   raise EMessage.Create(AMensagem);
+end;
+
+class procedure TUtilsMessages.ToastMessage(const AMensagem: string);
+begin
+  TUtilsMessages.ToastMessage(TForm(Application.MainForm), AMensagem, TAlignLayout.Top);
 end;
 
 class procedure TUtilsMessages.ButtonCopyClick(Sender: TObject);
