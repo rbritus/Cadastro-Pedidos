@@ -1,0 +1,797 @@
+object ViewCadastroPedido: TViewCadastroPedido
+  Left = 0
+  Top = 0
+  BorderStyle = Single
+  Caption = 'Cadastro de Pedidos'
+  ClientHeight = 603
+  ClientWidth = 917
+  Position = OwnerFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object lytBotoes: TLayout
+    Align = Bottom
+    Margins.Left = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Position.X = 5.000000000000000000
+    Position.Y = 542.000000000000000000
+    Size.Width = 907.000000000000000000
+    Size.Height = 56.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    TabStop = False
+    object recBotoes: TRectangle
+      Align = Client
+      Fill.Color = claWhite
+      Size.Width = 907.000000000000000000
+      Size.Height = 56.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object btnGravarPedido: TRoundRect
+        Align = Scale
+        Cursor = crHandPoint
+        Fill.Color = xFF6189E2
+        Position.X = 736.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 163.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        OnClick = btnGravarPedidoClick
+        object Label3: TLabel
+          Align = Center
+          AutoSize = True
+          StyledSettings = [Family]
+          Size.Width = 120.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = 'Gravar Pedido'
+          TabOrder = 0
+          object ShadowEffect3: TShadowEffect
+            Distance = 3.000000000000000000
+            Direction = 45.000000000000000000
+            Softness = 0.300000011920929000
+            Opacity = 0.600000023841857900
+            ShadowColor = claBlack
+          end
+        end
+      end
+      object btnCarregarPedido: TRoundRect
+        Align = Scale
+        Cursor = crHandPoint
+        Fill.Color = xFF6189E2
+        Position.X = 8.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 163.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        OnClick = btnCarregarPedidoClick
+        object Label9: TLabel
+          Align = Center
+          AutoSize = True
+          StyledSettings = [Family]
+          Size.Width = 137.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = 'Carregar Pedido'
+          TabOrder = 0
+          object ShadowEffect21: TShadowEffect
+            Distance = 3.000000000000000000
+            Direction = 45.000000000000000000
+            Softness = 0.300000011920929000
+            Opacity = 0.600000023841857900
+            ShadowColor = claBlack
+          end
+        end
+      end
+      object btnExcluirPedido: TRoundRect
+        Align = Scale
+        Cursor = crHandPoint
+        Fill.Color = xFF6189E2
+        Position.X = 179.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 163.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        OnClick = btnExcluirPedidoClick
+        object Label10: TLabel
+          Align = Center
+          AutoSize = True
+          StyledSettings = [Family]
+          Size.Width = 120.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = 'Excluir Pedido'
+          TabOrder = 0
+          object ShadowEffect22: TShadowEffect
+            Distance = 3.000000000000000000
+            Direction = 45.000000000000000000
+            Softness = 0.300000011920929000
+            Opacity = 0.600000023841857900
+            ShadowColor = claBlack
+          end
+        end
+      end
+    end
+    object ShadowEffect1: TShadowEffect
+      Distance = 3.000000000000000000
+      Direction = 45.000000000000000000
+      Softness = 0.300000011920929000
+      Opacity = 0.600000023841857900
+      ShadowColor = claBlack
+    end
+  end
+  object lytCliente: TLayout
+    Align = Top
+    Margins.Left = 5.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Position.X = 5.000000000000000000
+    Position.Y = 5.000000000000000000
+    Size.Width = 907.000000000000000000
+    Size.Height = 84.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TabStop = False
+    object recDadosCliente: TRectangle
+      Align = Client
+      Fill.Color = claWhite
+      Size.Width = 907.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object recTituloCliente: TRectangle
+        Align = Top
+        Fill.Color = xFF868585
+        Size.Width = 907.000000000000000000
+        Size.Height = 42.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label1: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = []
+          Margins.Left = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Size.Width = 70.000000000000000000
+          Size.Height = 42.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 20.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          Text = 'Cliente'
+          TabOrder = 0
+        end
+      end
+      object edtCodigoCliente: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        Position.X = 8.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'C'#243'digo'
+        OnChange = edtCodigoClienteChange
+        OnExit = edtCodigoClienteExit
+        object ShadowEffect10: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object edtNomeCliente: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 2
+        TabStop = False
+        ReadOnly = True
+        Position.X = 120.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 460.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Nome'
+        object ShadowEffect11: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object edtCidadeCliente: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 3
+        TabStop = False
+        ReadOnly = True
+        Position.X = 590.369934082031300000
+        Position.Y = 50.000000000000000000
+        Size.Width = 233.372985839843800000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Cidade'
+        object ShadowEffect12: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object edtUFCliente: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 4
+        TabStop = False
+        ReadOnly = True
+        Position.X = 833.834472656250000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 63.073547363281250000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'UF'
+        object ShadowEffect13: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object btnPesquisarCliente: TCircle
+        Position.X = 86.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 26.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = btnPesquisarClienteClick
+        object Image1: TImage
+          MultiResBitmap.Height = 20
+          MultiResBitmap.Width = 20
+          MultiResBitmap = <
+            item
+              Width = 20
+              Height = 20
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000140000001408060000008D891D
+                0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                02B849444154384FAD944B68136110C777F3C2A41A2D05B5877A326D12E3EB14
+                11AF9144E92329012B8A07A17813056F56ACD08B78E9D543A1176F7912242894
+                1285824534A03450BDA8948A97D8549BA449EA6F369B92A4B1A0F40FB3F37D33
+                B3FF9D996FF653F61AAAAE5BE0F7FBED56ABF5D2D6D6D649B60790AFAC5F2612
+                89F75AC02E68275443A1D0DD72B93C61369B0FEAB66DD46AB539A3D1782B1A8D
+                2EEBA61D682654474646665555BDCE7A8597A74D26D31C99AD23FDD86E204124
+                CFDE178FC7DFB2DE0183AE15C8EEE864F3909DA0BCC7D56AB58B97A7B09D96CC
+                585FD9DCDCDC4F5C6C6868485AB1031AA1F4AC52A93C6029990521CB8B1D0C6C
+                6C6C0CA31F158BC52CBE0FB462827D9FC160B8AD45B44123B4D96C01E99994D9
+                44A650D653CAB6B3BC87FF2859CED8EDF669B2FC499663F5A8566884109D124D
+                D0BCE866A452A9DFB158EC892C116FA1503802F102993BC3E1B0450B6A824608
+                51976888D7457702FD8BE02FD2D71AE516182B03D360D3DDDB681CCA3779402C
+                A7D911943F5B2A950ED11299C9014C6BCDED694023E48B2F742DA3F157A4D3E9
+                12D310E2C3D2A26CDDDA0AA33C969696BE3B9DCE0B0406DC6E778EFD47CDDB06
+                9FCF7798B2331C90991EF67A3C9E37B95CEEB3EED6A0110A1C0EC702C1D7C872
+                CCE57255BD5EEF62369BADE86E85B90B5B2C960C62A5E44F70DAD057895D6C26
+                6DF9F5464747CF429A60D987ACF1C20259FFE220FA39598FC4E05FCEE7F3EE9E
+                9E9EF3F89FB33712334C8FEB6D9347039148E41D73E726F03E245F08BC883904
+                D931F42BCA2C3383BDDDDDDDE7F89F33C45DA6A22A71D1C1C1C1E3C2D1F1B669
+                607C7CDCBCBABABA2F994C16641F0C06FD641483B442E901B27ACD218D41F80C
+                F724F3FA7057C24E6823BD89C909E1A454C507A6FE995020A4A808A20D36EDF9
+                813A43252BFF4528E0DE7490A9DC4E65F48C90D53D7B0A45F9031EA751E35B62
+                7B6F0000000049454E44AE426082}
+              FileName = 
+                'C:\Users\rafael.brito\Downloads\3937337_enlarge_glass_magnifier_' +
+                'magnifying_search_icon.png'
+            end>
+          Align = Client
+          HitTest = False
+          Size.Width = 26.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object ShadowEffect14: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+    end
+    object ShadowEffect5: TShadowEffect
+      Distance = 3.000000000000000000
+      Direction = 45.000000000000000000
+      Softness = 0.300000011920929000
+      Opacity = 0.600000023841857900
+      ShadowColor = claBlack
+    end
+  end
+  object lytProdutos: TLayout
+    Align = Client
+    Margins.Left = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Size.Width = 907.000000000000000000
+    Size.Height = 354.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    TabStop = False
+    object recDadosProduto: TRectangle
+      Align = Top
+      Fill.Color = claWhite
+      Size.Width = 907.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object recTituloProdutos: TRectangle
+        Align = Top
+        Fill.Color = xFF868585
+        Size.Width = 907.000000000000000000
+        Size.Height = 42.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label2: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = []
+          Margins.Left = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Size.Width = 86.000000000000000000
+          Size.Height = 42.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 20.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          Text = 'Produtos'
+          TabOrder = 0
+        end
+      end
+      object edtCodigoProduto: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        Position.X = 8.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'C'#243'digo'
+        OnExit = edtCodigoProdutoExit
+        object ShadowEffect15: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object edtDescricaoProduto: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 1
+        TabStop = False
+        ReadOnly = True
+        Position.X = 120.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 397.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Nome'
+        object ShadowEffect17: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object btnAddProduto: TRoundRect
+        Align = Scale
+        Cursor = crHandPoint
+        Fill.Color = xFF6189E2
+        Position.X = 777.000000000000000000
+        Position.Y = 46.000000000000000000
+        Size.Width = 122.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        OnClick = btnAddProdutoClick
+        object Label4: TLabel
+          Align = Center
+          AutoSize = True
+          StyledSettings = [Family]
+          Size.Width = 64.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.WordWrap = False
+          Text = 'Adicionar'
+          TabOrder = 0
+          object ShadowEffect7: TShadowEffect
+            Distance = 3.000000000000000000
+            Direction = 45.000000000000000000
+            Softness = 0.300000011920929000
+            Opacity = 0.600000023841857900
+            ShadowColor = claBlack
+          end
+        end
+      end
+      object edtPreco: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 3
+        FilterChar = '0123456789,'
+        Position.X = 638.305969238281300000
+        Position.Y = 50.000000000000000000
+        Size.Width = 126.147399902343800000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Pre'#231'o R$'
+        object ShadowEffect19: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object btnPesquisarProduto: TCircle
+        Position.X = 86.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 26.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = btnPesquisarProdutoClick
+        object Image2: TImage
+          MultiResBitmap.Height = 20
+          MultiResBitmap.Width = 20
+          MultiResBitmap = <
+            item
+              Width = 20
+              Height = 20
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000140000001408060000008D891D
+                0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                02B849444154384FAD944D68135110C7B349134CAAD152507BA827D3A6D1F871
+                8A88D748AAF4230901238A0721F4260ADEAC58A117F1D2AB87422FDEF24991A2
+                504A150216D1809240F5A2522A5E6253439226A9BFD96CCA268D05A57F783BF3
+                6666FF3B336FDE1AF61B8A265BE0F3F9EC56ABF5CAF6F6B69BED21D637F457C9
+                64F2831AB007DA0995402070AF52A94C9ACDE6C39A6D07F57A7DD164324DC462
+                B155CDB40B7A42657C7C7C4E51949BE86BBC3CD3D5D5B548669BAC016CB7587E
+                569EBD379148BC43DF05A3260D90DDD5C896203B45794F6AB55A372F4F633B2B
+                99A15FDBDADA3A485C7C7474545AB10B2AA1F4AC5AAD3E4495CCFC90E5C50E06
+                8BC5E218F271A954CAE0FB482B26D9F71B8DC63B6A441B54429BCD362C3D9332
+                756406CA7A86DD8E7A1F799C2C67ED76FB0C59FE22CB7023AA152A2144674412
+                B424528FF9F9F9623C1E7F2A2ACB5328148E419C2673672814B2A8413AA88410
+                758B8478536427D0BF28FE127DAD536E81AA8C4C834D73EFA07928DFE501B19C
+                664750FE5CB95C3E424B642607316DE8DBD3844AC8175F6A5246E3AF58585828
+                330D013E2C2DCA34ACAD30C9239BCDFE703A9D97081C76B95C39F69F546F1BBC
+                5EEF514A5EE680CCF4B0CFED76BFCDE5725F34B70A9550E07038D2F4E8065986
+                8786866A1E8F672593C95435B781B90B592C96659695923F236DC8EBC4AEE849
+                5BAE5E30183C0F6912B59FB5C10B69B2FE4D56039CEC6989C1BF9ACFE75DBDBD
+                BD17F1BF606F22668C1E37DA268F26A2D1E87BAE9B8BC007907C25F032E60064
+                2790AF29B3C20CF6F5F4F45CE03E2F1377958A6AC4C54646464E0A47C7BF4D13
+                9148C4BCBEBE7E20954A1564EFF7FB7D641487B44AC9C364F586430A43F81CF7
+                14F3FA684FC24E6823BD8DC909E19454C507A6FF995020A488284B1D6CDAF313
+                718E4AD6FE8B50C07FD341A6F277AA206785ACE1D957180C7F00168251E02A55
+                35B20000000049454E44AE426082}
+              FileName = 
+                'C:\Users\rafael.brito\Downloads\3937337_enlarge_glass_magnifier_' +
+                'magnifying_search_icon.png'
+            end>
+          Align = Client
+          HitTest = False
+          Size.Width = 26.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+        end
+        object ShadowEffect16: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object edtQuantidade: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Scale
+        TabOrder = 2
+        FilterChar = '0123456789'
+        Position.X = 527.296203613281300000
+        Position.Y = 50.000000000000000000
+        Size.Width = 100.917968750000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Quantidade'
+        object ShadowEffect18: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+    end
+    object ShadowEffect2: TShadowEffect
+      Distance = 3.000000000000000000
+      Direction = 45.000000000000000000
+      Softness = 0.300000011920929000
+      Opacity = 0.600000023841857900
+      ShadowColor = claBlack
+    end
+    object grdDados: TStringGrid
+      Align = Client
+      CanFocus = True
+      ClipChildren = True
+      Size.Width = 907.000000000000000000
+      Size.Height = 242.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Viewport.Width = 903.000000000000000000
+      Viewport.Height = 217.000000000000000000
+    end
+    object Rectangle1: TRectangle
+      Align = Bottom
+      Fill.Color = claWhite
+      Position.Y = 326.000000000000000000
+      Size.Width = 907.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object edtValorTotal: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akTop, akRight]
+        TabOrder = 0
+        ReadOnly = True
+        TextSettings.HorzAlign = Trailing
+        Position.X = 797.000000000000000000
+        Position.Y = 3.000000000000000000
+        object ShadowEffect4: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object Label5: TLabel
+        StyledSettings = [Family, Size, FontColor]
+        Position.X = 712.000000000000000000
+        Position.Y = 7.000000000000000000
+        Size.Width = 77.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Trailing
+        Text = 'Valor total: '
+        TabOrder = 1
+      end
+    end
+  end
+  object ShadowEffect6: TShadowEffect
+    Distance = 3.000000000000000000
+    Direction = 45.000000000000000000
+    Softness = 0.300000011920929000
+    Opacity = 0.600000023841857900
+    ShadowColor = claBlack
+  end
+  object lytPedido: TLayout
+    Align = Bottom
+    Margins.Left = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Position.X = 5.000000000000000000
+    Position.Y = 453.000000000000000000
+    Size.Width = 907.000000000000000000
+    Size.Height = 84.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    object Rectangle2: TRectangle
+      Align = Client
+      Fill.Color = claWhite
+      Size.Width = 907.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      object Rectangle3: TRectangle
+        Align = Top
+        Fill.Color = xFF868585
+        Size.Width = 907.000000000000000000
+        Size.Height = 42.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label6: TLabel
+          Align = Left
+          AutoSize = True
+          StyledSettings = []
+          Margins.Left = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Size.Width = 86.000000000000000000
+          Size.Height = 42.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 20.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          Text = 'Pedido'
+          TabOrder = 0
+        end
+      end
+      object edtNumeroPedido: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        ReadOnly = True
+        Position.X = 56.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 121.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'N'#250'mero do pedido'
+        object ShadowEffect8: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object edtDataEmissao: TDateEdit
+        Date = 45149.000000000000000000
+        Position.X = 295.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 121.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object ShadowEffect20: TShadowEffect
+          Distance = 3.000000000000000000
+          Direction = 45.000000000000000000
+          Softness = 0.300000011920929000
+          Opacity = 0.600000023841857900
+          ShadowColor = claBlack
+        end
+      end
+      object Label7: TLabel
+        AutoSize = True
+        Position.X = 216.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 71.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'Data Emiss'#227'o'
+        TabOrder = 4
+      end
+      object Label8: TLabel
+        AutoSize = True
+        Position.X = 8.000000000000000000
+        Position.Y = 50.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.WordWrap = False
+        Text = 'Pedido:'
+        TabOrder = 3
+      end
+    end
+    object ShadowEffect9: TShadowEffect
+      Distance = 3.000000000000000000
+      Direction = 45.000000000000000000
+      Softness = 0.300000011920929000
+      Opacity = 0.600000023841857900
+      ShadowColor = claBlack
+    end
+  end
+  object dscProdutos: TDataSource
+    DataSet = tabProdutos
+    Left = 32
+    Top = 248
+  end
+  object tabProdutos: TFDMemTable
+    OnCalcFields = tabProdutosCalcFields
+    AggregatesActive = True
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 32
+    Top = 192
+    object tabProdutosCodigo: TIntegerField
+      FieldName = 'Codigo'
+    end
+    object tabProdutosDescricao: TStringField
+      FieldName = 'Descricao'
+      Size = 100
+    end
+    object tabProdutosPreco: TFloatField
+      FieldName = 'Preco'
+    end
+    object tabProdutosquantidade: TIntegerField
+      DisplayLabel = 'Quantidade'
+      FieldName = 'quantidade'
+    end
+    object tabProdutosID_PEDIDOPRODUTO: TIntegerField
+      FieldName = 'ID_PEDIDOPRODUTO'
+      Visible = False
+    end
+    object tabProdutosvalor_total: TFloatField
+      DisplayLabel = 'Valor Total'
+      FieldKind = fkCalculated
+      FieldName = 'valor_total'
+      Calculated = True
+    end
+    object tabProdutosTotalGeral: TAggregateField
+      FieldName = 'TotalGeral'
+      Active = True
+      DisplayName = ''
+      Expression = 'SUM(quantidade * Preco)'
+    end
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = tabProdutos
+    ScopeMappings = <>
+    Left = 32
+    Top = 304
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 20
+    Top = 5
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = grdDados
+      Columns = <
+        item
+          MemberName = 'Codigo'
+          ReadOnly = True
+          Width = 60
+        end
+        item
+          MemberName = 'Descricao'
+          ReadOnly = True
+          Width = 540
+        end
+        item
+          MemberName = 'quantidade'
+          Width = 80
+        end
+        item
+          MemberName = 'Preco'
+          Width = 80
+        end
+        item
+          MemberName = 'valor_total'
+          ReadOnly = True
+          Width = 100
+        end>
+    end
+  end
+end
