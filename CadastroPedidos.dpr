@@ -24,7 +24,6 @@ uses
   Repository.Pedido in 'Repositorys\Repository.Pedido.pas',
   Utils.Serialize in 'Utils\Utils.Serialize.pas',
   Attributes.Entidades in 'Attributes\Attributes.Entidades.pas',
-  Utils.Entidade in 'Utils\Utils.Entidade.pas',
   DAO.PedidoProduto in 'DAO\DAO.PedidoProduto.pas',
   Repository.PedidoProduto in 'Repositorys\Repository.PedidoProduto.pas',
   View.Pesquisa in 'Views\View.Pesquisa.pas' {ViewPesquisa},
@@ -32,14 +31,13 @@ uses
   DAO.Cliente in 'DAO\DAO.Cliente.pas',
   Repository.Produto in 'Repositorys\Repository.Produto.pas',
   DAO.Produto in 'DAO\DAO.Produto.pas',
-  Controller.View.Cadastro.Pedido in 'Controllers\Controller.View.Cadastro.Pedido.pas';
+  Controller.View.Cadastro.Pedido in 'Controllers\Controller.View.Cadastro.Pedido.pas',
+  Utils.Entidade in 'Utils\Utils.Entidade.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TViewCadastroPedido, ViewCadastroPedido);
-  Application.CreateForm(TViewCadastro, ViewCadastro);
-  Application.CreateForm(TViewPesquisa, ViewPesquisa);
   Application.Run;
 end.

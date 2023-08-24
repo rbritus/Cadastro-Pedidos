@@ -111,8 +111,7 @@ end;
 
 class function TConexao.GetQuery: TQuery;
 begin
-  var Query: TFDQuery;
-  Query := TFDQuery.Create(nil);
+  var Query := TFDQuery.Create(nil);
   Query.Connection := GetConnection;
   Result := TQuery(Query);
 end;

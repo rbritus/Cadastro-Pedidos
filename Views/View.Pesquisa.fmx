@@ -1,16 +1,14 @@
 object ViewPesquisa: TViewPesquisa
   Left = 0
   Top = 0
-  BorderStyle = ToolWindow
-  Caption = 'Selecione o '
+  BorderIcons = [biSystemMenu]
   ClientHeight = 480
   ClientWidth = 640
-  Position = OwnerFormCenter
+  Position = MainFormCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
-  FormFactor.Devices = [Desktop]
-  OnClose = FormClose
-  OnShow = FormShow
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnCreate = FormCreate
   DesignerMasterStyle = 0
   object lytBotoes: TLayout
     Align = Bottom

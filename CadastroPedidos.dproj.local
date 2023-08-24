@@ -26,14 +26,14 @@
     <Transaction>2023/08/08 22:29:43.000.824,D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas=D:\Teste WK Technology\Lançador de Pedidos\Entidades\Entidade.Produto.pas</Transaction>
     <Transaction>2023/08/08 22:31:02.000.701,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
     <Transaction>2023/08/08 22:31:17.000.173,D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas=D:\Teste WK Technology\Lançador de Pedidos\Builder\Builder.Produto.pas</Transaction>
-    <Transaction>2023/08/08 22:31:33.000.333,D:\Teste WK Technology\Lançador de Pedidos\Builder\Builder.Cliente.pas=</Transaction>
     <Transaction>2023/08/08 22:31:33.000.266,D:\Teste WK Technology\Lançador de Pedidos\Builder\Builder.Produto.pas=</Transaction>
+    <Transaction>2023/08/08 22:31:33.000.333,D:\Teste WK Technology\Lançador de Pedidos\Builder\Builder.Cliente.pas=</Transaction>
     <Transaction>2023/08/08 22:31:50.000.431,=D:\Teste WK Technology\Lançador de Pedidos\Builders\Builder.Produto.pas</Transaction>
     <Transaction>2023/08/08 22:31:50.000.398,=D:\Teste WK Technology\Lançador de Pedidos\Builders\Builder.Cliente.pas</Transaction>
     <Transaction>2023/08/09 09:11:54.000.857,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
     <Transaction>2023/08/09 09:12:18.000.576,=D:\Teste WK Technology\Lançador de Pedidos\Unit2.pas</Transaction>
-    <Transaction>2023/08/09 09:12:44.000.384,D:\Teste WK Technology\Lançador de Pedidos\Unit2.pas=D:\Teste WK Technology\Lançador de Pedidos\Views\View.Cadastro.pas</Transaction>
     <Transaction>2023/08/09 09:12:44.000.384,D:\Teste WK Technology\Lançador de Pedidos\Unit2.fmx=D:\Teste WK Technology\Lançador de Pedidos\Views\View.Cadastro.fmx</Transaction>
+    <Transaction>2023/08/09 09:12:44.000.384,D:\Teste WK Technology\Lançador de Pedidos\Unit2.pas=D:\Teste WK Technology\Lançador de Pedidos\Views\View.Cadastro.pas</Transaction>
     <Transaction>2023/08/09 09:15:41.000.633,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
     <Transaction>2023/08/09 09:16:04.000.577,D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas=D:\Teste WK Technology\Lançador de Pedidos\Utils\Utils.Enumerators.pas</Transaction>
     <Transaction>2023/08/09 09:36:35.000.988,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
@@ -69,8 +69,8 @@
     <Transaction>2023/08/10 14:25:51.000.285,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
     <Transaction>2023/08/10 14:26:02.000.789,D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas=D:\Teste WK Technology\Lançador de Pedidos\Repositorys\Repository.PedidoProduto.pas</Transaction>
     <Transaction>2023/08/10 17:15:10.000.504,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
-    <Transaction>2023/08/10 17:18:05.000.034,D:\Teste WK Technology\Lançador de Pedidos\Views\View.Pesquisa.fmx=D:\Teste WK Technology\Lançador de Pedidos\Unit1.fmx</Transaction>
     <Transaction>2023/08/10 17:18:05.000.034,D:\Teste WK Technology\Lançador de Pedidos\Views\View.Pesquisa.pas=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
+    <Transaction>2023/08/10 17:18:05.000.034,D:\Teste WK Technology\Lançador de Pedidos\Views\View.Pesquisa.fmx=D:\Teste WK Technology\Lançador de Pedidos\Unit1.fmx</Transaction>
     <Transaction>2023/08/10 23:00:47.000.827,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
     <Transaction>2023/08/10 23:01:51.000.729,D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas=D:\Teste WK Technology\Lançador de Pedidos\Repositorys\Repository.Cliente.pas</Transaction>
     <Transaction>2023/08/10 23:03:07.000.853,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
@@ -81,7 +81,9 @@
     <Transaction>2023/08/10 23:13:17.000.146,D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas=D:\Teste WK Technology\Lançador de Pedidos\DAO\DAO.Produto.pas</Transaction>
     <Transaction>2023/08/11 10:33:26.000.405,=D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas</Transaction>
     <Transaction>2023/08/11 10:33:52.000.581,D:\Teste WK Technology\Lançador de Pedidos\Unit1.pas=D:\Teste WK Technology\Lançador de Pedidos\Controllers\Controller.View.Cadastro.Pedido.pas</Transaction>
-    <Transaction>2023/08/11 11:09:36.827,D:\Teste WK Technology\Cadastro de Pedidos\CadastroPedidos.dproj=D:\Teste WK Technology\Cadastro de Pedidos\LancadorPedidos.dproj</Transaction>
+    <Transaction>2023/08/11 11:09:36.000.827,D:\Teste WK Technology\Cadastro de Pedidos\CadastroPedidos.dproj=D:\Teste WK Technology\Cadastro de Pedidos\LancadorPedidos.dproj</Transaction>
+    <Transaction>2023/08/24 10:32:51.000.040,D:\Teste WK Technology\Cadastro-Pedidos\Utils\Utils.Entidade.pas=</Transaction>
+    <Transaction>2023/08/24 10:33:57.529,=D:\Teste WK Technology\Cadastro-Pedidos\Utils\Utils.Entidade.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="activity-1.1.0.dex.jar"/>

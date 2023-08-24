@@ -8,7 +8,7 @@ uses
   FMX.Objects, FMX.Effects, FMX.Controls.Presentation, FMX.StdCtrls,
   System.Rtti, FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Entidade.Padrao,
   Data.DB, FireDAC.Comp.Client, Conexao.unConection, Utils.Entidade, Data.Bind.DBScope,
-  Data.Bind.Components, Data.Bind.Grid;
+  Data.Bind.Components, Data.Bind.Grid, Generics.Collections, Generics.Defaults;
 
 type
   TViewPesquisa = class(TForm)
@@ -21,71 +21,76 @@ type
     ShadowEffect3: TShadowEffect;
     grdDados: TGrid;
     procedure btnSelecionarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure grdDadosCellDblClick(const Column: TColumn; const Row: Integer);
+    procedure FormCreate(Sender: TObject);
   private
-    FEntidadeRetorno: TEntidade;
+    FSelecionado: Boolean;
     FQuery: TFDQuery;
     FDataSource: TDataSource;
-    FClasseEntidade: TEntidadeClass;
     FBindSourceDB: TBindSourceDB;
     FBindingsList: TBindingsList;
     FLinkGridToDataSource: TLinkGridToDataSource;
-    procedure CriarGridePorClasse;
+    procedure CriarGridePorClasse(AClasseEntidade: TClass);
     procedure InicializarComponentesBind;
     procedure FinalizarComponentesBind;
-    procedure CriarFieldsGride;
+    procedure CriarFieldsGride(AClasseEntidade: TClass);
     procedure AjustarColunas;
-    procedure CarregarEntidadeSelecionada;
-    procedure RetornarPesquisa;
+    procedure CarregarEntidadeSelecionada(AEntidade: TEntidade);
   public
-    procedure InformarClasseDaEntidade(AClasseEntidade: TEntidadeClass);
-    function ObterEntidadeDoRegistroSelecionado: TEntidade;
+    class function New(AOwner: TComponent): TViewPesquisa;
+    function InformarCaption(ACaption: string): TViewPesquisa;
+    function ShowConsulta<T: Class>: T;
   end;
-
-var
-  ViewPesquisa: TViewPesquisa;
 
 implementation
 
 {$R *.fmx}
 
-procedure TViewPesquisa.CarregarEntidadeSelecionada;
+function TViewPesquisa.ShowConsulta<T>: T;
 begin
-  FEntidadeRetorno := FClasseEntidade.Create;
-  TUtilsEntidade.PreencherEntidade(FEntidadeRetorno,FQuery);
+  var Entidade: T;
+  Self.CriarGridePorClasse(T);
+  Self.ShowModal;
+
+  if FSelecionado then
+  begin
+    Entidade := TUtilsEntidade.ObterObjetoGenerico<T>;
+    CarregarEntidadeSelecionada(TEntidade(Entidade));
+  end;
+
+  Result := Entidade;
 end;
 
-procedure TViewPesquisa.RetornarPesquisa;
+procedure TViewPesquisa.CarregarEntidadeSelecionada(AEntidade: TEntidade);
 begin
-  CarregarEntidadeSelecionada;
-  Self.Close;
+  TUtilsEntidade.PreencherEntidade(AEntidade,FQuery);
 end;
 
 procedure TViewPesquisa.btnSelecionarClick(Sender: TObject);
 begin
-  RetornarPesquisa;
+  FSelecionado := True;
+  Close;
 end;
 
-procedure TViewPesquisa.CriarGridePorClasse;
+procedure TViewPesquisa.CriarGridePorClasse(AClasseEntidade: TClass);
 begin
   FQuery := TConexao.GetQuery;
   FDataSource.DataSet := FQuery;
-  FQuery.Open(TUtilsEntidade.ObterSelectSql(FClasseEntidade));
+  FQuery.Open(TUtilsEntidade.ObterSelectSql(TEntidadeClass(AClasseEntidade)));
 
   FBindSourceDB.DataSet := FQuery;
 
   FLinkGridToDataSource := TLinkGridToDataSource.Create(FBindingsList);
   FLinkGridToDataSource.DataSource := FBindSourceDB;
   FLinkGridToDataSource.GridControl := grdDados;
-  CriarFieldsGride;
+  CriarFieldsGride(AClasseEntidade);
   AjustarColunas;
 end;
 
-procedure TViewPesquisa.CriarFieldsGride;
+procedure TViewPesquisa.CriarFieldsGride(AClasseEntidade: TClass);
 begin
-   TUtilsEntidade.InformarCaptionParaColunas(FQuery,FClasseEntidade);
+   TUtilsEntidade.InformarCaptionParaColunas(FQuery,TEntidadeClass(AClasseEntidade));
 
    for var Contador := 0 to Pred(FQuery.FieldCount) do
      with FLinkGridToDataSource.Columns.Add do
@@ -119,6 +124,20 @@ begin
 
   if Assigned(FQuery) then
     FQuery.DisposeOf;
+
+  Action := TCloseAction.caFree;
+end;
+
+procedure TViewPesquisa.FormCreate(Sender: TObject);
+begin
+  FSelecionado := False;
+  InicializarComponentesBind;
+end;
+
+function TViewPesquisa.InformarCaption(ACaption: string): TViewPesquisa;
+begin
+  Result := Self;
+  Self.Caption := ACaption;
 end;
 
 procedure TViewPesquisa.InicializarComponentesBind;
@@ -128,9 +147,9 @@ begin
   FBindingsList := TBindingsList.Create(Self);
 end;
 
-function TViewPesquisa.ObterEntidadeDoRegistroSelecionado: TEntidade;
+class function TViewPesquisa.New(AOwner: TComponent): TViewPesquisa;
 begin
-  Result := FEntidadeRetorno;
+  Result := TViewPesquisa.Create(AOwner)
 end;
 
 procedure TViewPesquisa.FinalizarComponentesBind;
@@ -140,21 +159,11 @@ begin
   FBindingsList.DisposeOf;
 end;
 
-procedure TViewPesquisa.FormShow(Sender: TObject);
-begin
-  InicializarComponentesBind;
-  CriarGridePorClasse;
-end;
-
 procedure TViewPesquisa.grdDadosCellDblClick(const Column: TColumn;
   const Row: Integer);
 begin
-  RetornarPesquisa;
-end;
-
-procedure TViewPesquisa.InformarClasseDaEntidade(AClasseEntidade: TEntidadeClass);
-begin
-  FClasseEntidade := AClasseEntidade;
+  FSelecionado := True;
+  Close;
 end;
 
 end.

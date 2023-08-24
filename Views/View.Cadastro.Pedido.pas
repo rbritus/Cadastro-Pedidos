@@ -144,6 +144,9 @@ var
 
 implementation
 
+uses
+  Entidade.Padrao;
+
 {$R *.fmx}
 
 procedure TViewCadastroPedido.AdicionarProdutoNaGride(AProduto: TProduto);
@@ -334,14 +337,12 @@ end;
 
 procedure TViewCadastroPedido.btnPesquisarClienteClick(Sender: TObject);
 begin
-  Application.CreateForm(TViewPesquisa,ViewPesquisa);
-  ViewPesquisa.InformarClasseDaEntidade(TCliente);
-  ViewPesquisa.ShowModal;
-  var Cliente := TCliente(ViewPesquisa.ObterEntidadeDoRegistroSelecionado);
-  ViewPesquisa.DisposeOf;
+  var Cliente := TViewPesquisa.New(Application.MainForm)
+                              .InformarCaption('Pesquisa de Clientes')
+                              .ShowConsulta<TCliente>;
 
   if not Assigned(Cliente) then
-    TUtilsMessages.ToastMessageExcept('Cliente não encontrado!');
+    TUtilsMessages.ToastMessageExcept('Cliente não selecionado!');
 
   PreencherCamposDoCliente(Cliente);
 end;
@@ -365,14 +366,12 @@ end;
 
 procedure TViewCadastroPedido.btnPesquisarProdutoClick(Sender: TObject);
 begin
-  Application.CreateForm(TViewPesquisa,ViewPesquisa);
-  ViewPesquisa.InformarClasseDaEntidade(TProduto);
-  ViewPesquisa.ShowModal;
-  var Produto := TProduto(ViewPesquisa.ObterEntidadeDoRegistroSelecionado);
-  ViewPesquisa.DisposeOf;
+  var Produto := TViewPesquisa.New(Application.MainForm)
+                              .InformarCaption('Pesquisa de Produtos')
+                              .ShowConsulta<TProduto>;
 
   if not Assigned(Produto) then
-    TUtilsMessages.ToastMessageExcept('Produto não encontrado!');
+    TUtilsMessages.ToastMessageExcept('Produto não selecionado!');
 
   AdicionarProdutoNaGride(Produto);
   edtCodigoProduto.SetFocus;

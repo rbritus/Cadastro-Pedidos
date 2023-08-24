@@ -12,6 +12,7 @@ type
     class procedure InformarCaptionParaColunas(DSet: TDataSet; Classe: TEntidadeClass);
     class function ObterSelectSql(Classe: TEntidadeClass): string;
     class function ObterNomeTabela(Classe: TEntidadeClass): string;
+    class function ObterObjetoGenerico<T: Class>: T;
   end;
 
 implementation
@@ -141,5 +142,22 @@ begin
     Ctx.Free;
   end;
 End;
+
+class function TUtilsEntidade.ObterObjetoGenerico<T>: T;
+begin
+  var ctx := TRttiContext.Create;
+  var rType := ctx.GetType(TypeInfo(T));
+  for var AMethCreate in rType.GetMethods do
+  begin
+    if (AMethCreate.IsConstructor) and (Length(AMethCreate.GetParameters) = 0) then
+    begin
+      var instanceType := rType.AsInstance;
+      var AValue := AMethCreate.Invoke(instanceType.MetaclassType, []);
+      Result := AValue.AsType<T>;
+
+      Exit;
+    end;
+  end;
+end;
 
 end.
