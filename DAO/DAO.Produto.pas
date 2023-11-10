@@ -27,7 +27,7 @@ uses
 
 function TDAOProduto.Insert(AEntidade: TProduto): Integer;
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryProduto.New.GetScriptInsert);
    Qry.ParamByName('DESCRICAO').AsString := AEntidade.Descricao;
    Qry.ParamByName('PRECO').AsFloat := AEntidade.Preco;
@@ -38,7 +38,7 @@ end;
 
 procedure TDAOProduto.Update(AEntidade: TProduto);
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryProduto.New.GetScriptUpdate);
    Qry.ParamByName('ID').AsInteger := AEntidade.ID;
    Qry.ParamByName('DESCRICAO').AsString := AEntidade.Descricao;
@@ -49,7 +49,7 @@ end;
 
 function TDAOProduto.Carregar(Id: Integer): TProduto;
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryProduto.New.GetScriptLoad);
    Qry.ParamByName('ID').AsInteger := Id;
    Qry.Open;
@@ -59,7 +59,7 @@ end;
 
 procedure TDAOProduto.Delete(AEntidade: TProduto);
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryProduto.New.GetScriptDelete);
    Qry.ParamByName('ID').AsInteger := AEntidade.ID;
    Qry.ExecSQL;
@@ -68,7 +68,7 @@ end;
 
 function TDAOProduto.GetListaEntidade: TObjectList<TProduto>;
 begin
-  var Qry := TConexao.GetConnection.GetQuery;
+  var Qry := TConexao.New.GetQuery;
   Qry.SQL.Add(TRepositoryProduto.New.GetScriptLoadList);
   Qry.Open;
   Result := TObjectList<TProduto>(TUtilsSerialize.DataSetToListaEntidade(TDataSet(Qry),TProduto));
@@ -82,7 +82,7 @@ end;
 
 function TDAOProduto.ObterListaComFiltro(ACondicaoSql: string): TObjectList<TProduto>;
 begin
-  var Qry := TConexao.GetConnection.GetQuery;
+  var Qry := TConexao.New.GetQuery;
   Qry.SQL.Add(TRepositoryProduto.New.GetScriptLoadFilter);
   Qry.MacroByName('MACRO').AsRaw := ACondicaoSql;
   Qry.Open;

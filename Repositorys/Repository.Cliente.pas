@@ -29,7 +29,7 @@ begin
     .Append('(NOME, CIDADE, UF) ')
     .Append('VALUES ')
     .Append('(:NOME, :CIDADE, :UF);')
-    .Append(TConexao.SELECT_RECUPERACAO_ID);
+    .Append(TConexao.New.GetSqlRecuperaID);
 
   Result := SQL.ToString;
   SQL.DisposeOf;

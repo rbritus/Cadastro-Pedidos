@@ -30,8 +30,6 @@ implementation
 
 { TViewCadastro }
 
-{ TViewCadastro }
-
 function TViewCadastro.FormEmEdicao: Boolean;
 begin
   Result := FComportamento = ccEditando;

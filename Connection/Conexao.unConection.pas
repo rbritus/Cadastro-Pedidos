@@ -8,45 +8,42 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Comp.Client, Data.DbxMySql, FireDAC.Phys.MySQL, FireDAC.FMXUI.Wait,
   FireDAC.Phys.MySQLDef, FireDAC.Stan.ExprFuncs, FireDAC.Stan.Intf,
-  DB, Datasnap.DBClient, Datasnap.Provider, FireDAC.DApt, inifiles;
+  DB, Datasnap.DBClient, Datasnap.Provider, FireDAC.DApt, inifiles,
+  System.StrUtils;
 
 type
   TQuery = class(TFDQuery);
 
-  TConexao = class(TFDConnection)
-  strict private
-    DriverLink: TFDPhysMySQLDriverLink;
-    Transaction: TFDTransaction;
-    FDataBase: string;
-    FUserName: string;
-    FPassword: string;
-    FServer: string;
-    FPort: string;
-    FLib: string;
-    class var FConection: TConexao;
-    procedure GetConexao();
+  TConexao = class
   private
-    function GetDatabaseNameFromIni(): string;
+    class var FInstance: TConexao;
+    class var FConection: TFDConnection;
+    function GetConection: TFDConnection;
+    function GetDriver: string;
+    function GetSqlNextId: string;
   public
-    constructor Create(AOwner: TComponent); override;
-    class function GetConnection: TConexao;
-    class function GetQuery: TQuery;
-    class function GetNextId(TableName, CampoId: String): Integer;
+    class function New: TConexao;
+    procedure Commit;
+    procedure Rollback;
+    function GetQuery: TQuery;
+    function GetNextId(TableName, CampoId: String): Integer;
     procedure FecharConexao();
 
-    const SELECT_RECUPERACAO_ID = 'SELECT last_insert_id() ID;';
+    function GetSqlRecuperaID: string;
   end;
 
-implementation
+implementation  
 
 uses
-  vcl.Forms;
+  vcl.Forms,
+  Conexao.MySql,
+  Conexao.SqLite;
 
 { TConexao }
 
-constructor TConexao.Create(AOwner: TComponent);
+procedure TConexao.Commit;
 begin
-  inherited;
+  FConection.CommitRetaining;
 end;
 
 procedure TConexao.FecharConexao;
@@ -54,65 +51,84 @@ begin
   FConection.Close;
 end;
 
-procedure TConexao.GetConexao;
+class function TConexao.New: TConexao;
 begin
-  DriverLink := TFDPhysMySQLDriverLink.Create(nil);
-  Transaction := TFDTransaction.Create(nil);
-  Transaction.Connection := FConection;
-  GetDatabaseNameFromIni();
-  DriverLink.VendorLib := FLib;
-  FConection.TxOptions.AutoCommit := False;
-  FConection.Params.Values['DriverID'] := 'MySQL';
-  FConection.Params.Values['Database'] := FDataBase;
-  FConection.Params.Values['User_Name'] := FUserName;
-  FConection.Params.Values['Password'] := FPassword;
-  FConection.Params.Values['Server'] := FServer;
-  FConection.Params.Values['Port'] := FPort;
-  FConection.Connected := True;
+  if not Assigned(FInstance) then
+  begin
+    FInstance := TConexao(Inherited NewInstance);
+    FInstance.Create;
+    if not Assigned(FConection) then
+      FConection := FInstance.GetConection;
+  end;
+
+  if not FConection.InTransaction then
+    FConection.StartTransaction;
+
+  Result := FInstance;
 end;
 
-function TConexao.GetDatabaseNameFromIni: string;
+procedure TConexao.Rollback;
+begin
+  FConection.RollbackRetaining;
+end;
+
+function TConexao.GetConection: TFDConnection;
+begin
+  Result := Nil;
+  var lDriver := GetDriver;
+  if lDriver.ToUpper = 'MYSQL' then
+    Exit(TConexaoMySql.New);
+    
+  if lDriver.ToUpper = 'SQLITE' then
+    Exit(TConexaoSqLite.New);  
+end;
+
+function TConexao.GetDriver: string;
 begin
   var appINI: TMemIniFile;
   var Diretorio := IncludeTrailingPathDelimiter(ExtractFileDir(Application.ExeName));
   appINI := TMemIniFile.Create(Diretorio + 'app.ini',TEncoding.UTF8);
-  FDataBase := appINI.ReadString('Conexao', 'database', EmptyStr);
-  FUserName := appINI.ReadString('Conexao', 'username', EmptyStr);
-  FPassword := appINI.ReadString('Conexao', 'password', EmptyStr);
-  FServer := appINI.ReadString('Conexao', 'server', EmptyStr);
-  FPort := appINI.ReadString('Conexao', 'port', EmptyStr);
-  FLib := appINI.ReadString('Conexao', 'lib', EmptyStr);
+  Result := appINI.ReadString('Conexao', 'driver', 'SqLite');
   appINI.Free;
 end;
 
-class function TConexao.GetConnection: TConexao;
+function TConexao.GetNextId(TableName, CampoId: String): Integer;
 begin
-  if not Assigned(Self.FConection) then
-  begin
-    FConection := TConexao(Inherited NewInstance);
-    FConection.Create(nil);
-    FConection.GetConexao;
-  end;
-  if not Self.FConection.InTransaction then
-    Self.FConection.StartTransaction;
-
-  Result := Self.FConection;
-end;
-
-class function TConexao.GetNextId(TableName, CampoId: String): Integer;
-begin
+  var lSql := GetSqlNextId;
   var Query: TFDQuery;
   Query := GetQuery;
-  Query.Open('SELECT IfNull(MAX('+ CampoId + '), 0) + 1 AS MAX FROM ' + TableName);
+  Query.Open(Format(lSql,[CampoId,TableName]));
   Result := Query.FieldByName('MAX').AsInteger;
   Query.Close;
   Query.DisposeOf;
+end;      
+
+function TConexao.GetSqlNextId: string;
+begin
+  Result := EmptyStr; 
+  var lDriver := GetDriver;
+  if lDriver.ToUpper = 'MYSQL' then
+    Exit(TConexaoMySql.GetSqlNextId);
+    
+  if lDriver.ToUpper = 'SQLITE' then
+    Exit(TConexaoSqLite.GetSqlNextId);  
 end;
 
-class function TConexao.GetQuery: TQuery;
+function TConexao.GetSqlRecuperaID: string;
+begin
+  Result := EmptyStr; 
+  var lDriver := GetDriver;
+  if lDriver.ToUpper = 'MYSQL' then
+    Exit(TConexaoMySql.GetSqlRecuperaId);
+    
+  if lDriver.ToUpper = 'SQLITE' then
+    Exit(TConexaoSqLite.GetSqlRecuperaId);  
+end;
+
+function TConexao.GetQuery: TQuery;
 begin
   var Query := TFDQuery.Create(nil);
-  Query.Connection := GetConnection;
+  Query.Connection := FConection;
   Result := TQuery(Query);
 end;
 

@@ -22,15 +22,23 @@ type
       property Cidade: String read FCidade write FCidade;
       [TCampoTexto('UF', 'UF')]
       property UF: string read FUF write FUF;
-      constructor Create(Builder: IBuilderCliente); overload;
+
+      class function New: TCliente;
+      function Preencher(Builder: IBuilderCliente): TCliente;
   end;
 
 implementation
 
 { TCliente }
 
-constructor TCliente.Create(Builder: IBuilderCliente);
+class function TCliente.New: TCliente;
 begin
+  Result := Self.Create;
+end;
+
+function TCliente.Preencher(Builder: IBuilderCliente): TCliente;
+begin
+  Result := Self;
   Builder
     .GetID(FID)
     .GetNome(FNome)

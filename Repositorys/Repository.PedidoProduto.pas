@@ -29,7 +29,7 @@ begin
     .Append('(NUMERO_PEDIDO, ID_PRODUTO, QUANTIDADE, PRECO, VALOR_TOTAL) ')
     .Append('VALUES ')
     .Append('(:NUMERO_PEDIDO, :ID_PRODUTO, :QUANTIDADE, :PRECO, :VALOR_TOTAL);')
-    .Append(TConexao.SELECT_RECUPERACAO_ID);
+    .Append(TConexao.New.GetSqlRecuperaID);
 
   Result := SQL.ToString;
   SQL.DisposeOf;

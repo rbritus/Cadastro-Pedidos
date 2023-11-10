@@ -28,7 +28,7 @@ uses
 
 function TDAOPedido.Insert(AEntidade: TPedido): Integer;
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryPedido.New.GetScriptInsert);
    Qry.ParamByName('NUMERO').AsInteger := AEntidade.Numero;
    Qry.ParamByName('DATA_EMISSAO').AsDateTime := AEntidade.DataEmissao;
@@ -41,7 +41,7 @@ end;
 
 procedure TDAOPedido.Update(AEntidade: TPedido);
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryPedido.New.GetScriptUpdate);
    Qry.ParamByName('NUMERO').AsInteger := AEntidade.Numero;
    Qry.ParamByName('DATA_EMISSAO').AsDateTime := AEntidade.DataEmissao;
@@ -53,7 +53,7 @@ end;
 
 function TDAOPedido.Carregar(Id: Integer): TPedido;
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryPedido.New.GetScriptLoad);
    Qry.ParamByName('NUMERO').AsInteger := Id;
    Qry.Open;
@@ -63,7 +63,7 @@ end;
 
 procedure TDAOPedido.Delete(AEntidade: TPedido);
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryPedido.New.GetScriptDelete);
    Qry.ParamByName('NUMERO').AsInteger := AEntidade.Numero;
    Qry.ExecSQL;
@@ -72,7 +72,7 @@ end;
 
 function TDAOPedido.GetListaEntidade: TObjectList<TPedido>;
 begin
-  var Qry := TConexao.GetConnection.GetQuery;
+  var Qry := TConexao.New.GetQuery;
   Qry.SQL.Add(TRepositoryPedido.New.GetScriptLoadList);
   Qry.Open;
   Result := TObjectList<TPedido>(TUtilsSerialize.DataSetToListaEntidade(TDataSet(Qry),TPedido));
@@ -81,7 +81,7 @@ end;
 
 class function TDAOPedido.GetNovoNumeroPedido: Integer;
 begin
-  Result := TConexao.GetConnection.GetNextId('PEDIDO','NUMERO');
+  Result := TConexao.New.GetNextId('PEDIDO','NUMERO');
 end;
 
 class function TDAOPedido.New: IDAOPadrao<TPedido>;
@@ -91,7 +91,7 @@ end;
 
 function TDAOPedido.ObterListaComFiltro(ACondicaoSql: string): TObjectList<TPedido>;
 begin
-  var Qry := TConexao.GetConnection.GetQuery;
+  var Qry := TConexao.New.GetQuery;
   Qry.SQL.Add(TRepositoryPedido.New.GetScriptLoadFilter);
   Qry.MacroByName('MACRO').AsRaw := ACondicaoSql;
   Qry.Open;

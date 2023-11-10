@@ -29,15 +29,22 @@ type
       [TCampoDecimal('VALOR_TOTAL', 'Valor total')]
       property ValorTotal: Double read FValorTotal write FValorTotal;
 
-      constructor Create(Builder: IBuilderPedidoProduto); overload;
+      class function New: TPedidoProduto;
+      function Preencher(Builder: IBuilderPedidoProduto): TPedidoProduto;
   end;
 
 implementation
 
 { TPedidoProduto }
 
-constructor TPedidoProduto.Create(Builder: IBuilderPedidoProduto);
+class function TPedidoProduto.New: TPedidoProduto;
 begin
+  Result := Self.Create;
+end;
+
+function TPedidoProduto.Preencher(Builder: IBuilderPedidoProduto): TPedidoProduto;
+begin
+  Result := Self;
   Builder
     .GetID(FID)
     .GetNumeroPedido(FNumeroPedido)

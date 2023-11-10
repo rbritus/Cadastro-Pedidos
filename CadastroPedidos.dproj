@@ -292,6 +292,15 @@
         <DCCReference Include="DAO\DAO.Produto.pas"/>
         <DCCReference Include="Controllers\Controller.View.Cadastro.Pedido.pas"/>
         <DCCReference Include="Utils\Utils.Entidade.pas"/>
+        <DCCReference Include="Exceptions\Excecao.Generic.pas"/>
+        <DCCReference Include="Exceptions\Excecao.InterfaceParse.pas"/>
+        <DCCReference Include="Exceptions\Excecao.AccessViolation.pas"/>
+        <DCCReference Include="Exceptions\Excecao.ConvercaoDeTipos.pas"/>
+        <DCCReference Include="Exceptions\Excecao.DBX.pas"/>
+        <DCCReference Include="Exceptions\Excecao.DataBase.pas"/>
+        <DCCReference Include="Exceptions\Excecao.MensagemPadrao.pas"/>
+        <DCCReference Include="Connection\Conexao.MySql.pas"/>
+        <DCCReference Include="Connection\Conexao.SqLite.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

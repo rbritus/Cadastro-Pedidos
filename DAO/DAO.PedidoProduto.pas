@@ -27,7 +27,7 @@ uses
 
 function TDAOPedidoProduto.Insert(AEntidade: TPedidoProduto): Integer;
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryPedidoProduto.New.GetScriptInsert);
    Qry.ParamByName('NUMERO_PEDIDO').AsInteger := AEntidade.NumeroPedido;
    Qry.ParamByName('ID_PRODUTO').AsInteger := AEntidade.IdProduto;
@@ -41,7 +41,7 @@ end;
 
 procedure TDAOPedidoProduto.Update(AEntidade: TPedidoProduto);
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryPedidoProduto.New.GetScriptUpdate);
    Qry.ParamByName('ID').AsInteger := AEntidade.ID;
    Qry.ParamByName('NUMERO_PEDIDO').AsInteger := AEntidade.NumeroPedido;
@@ -55,7 +55,7 @@ end;
 
 function TDAOPedidoProduto.Carregar(Id: Integer): TPedidoProduto;
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryPedidoProduto.New.GetScriptLoad);
    Qry.ParamByName('ID').AsInteger := Id;
    Qry.Open;
@@ -65,7 +65,7 @@ end;
 
 procedure TDAOPedidoProduto.Delete(AEntidade: TPedidoProduto);
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryPedidoProduto.New.GetScriptDelete);
    Qry.ParamByName('ID').AsInteger := AEntidade.ID;
    Qry.ExecSQL;
@@ -74,7 +74,7 @@ end;
 
 function TDAOPedidoProduto.GetListaEntidade: TObjectList<TPedidoProduto>;
 begin
-  var Qry := TConexao.GetConnection.GetQuery;
+  var Qry := TConexao.New.GetQuery;
   Qry.SQL.Add(TRepositoryPedidoProduto.New.GetScriptLoadList);
   Qry.Open;
   Result := TObjectList<TPedidoProduto>(TUtilsSerialize.DataSetToListaEntidade(TDataSet(Qry),TPedidoProduto));
@@ -88,7 +88,7 @@ end;
 
 function TDAOPedidoProduto.ObterListaComFiltro(ACondicaoSql: string): TObjectList<TPedidoProduto>;
 begin
-  var Qry := TConexao.GetConnection.GetQuery;
+  var Qry := TConexao.New.GetQuery;
   Qry.SQL.Add(TRepositoryPedidoProduto.New.GetScriptLoadFilter);
   Qry.MacroByName('MACRO').AsRaw := ACondicaoSql;
   Qry.Open;

@@ -66,7 +66,7 @@ end;
 
 procedure TControllerCadastroPedido.Commit;
 begin
-  TConexao.GetConnection.CommitRetaining;
+  TConexao.New.Commit;
 end;
 
 procedure TControllerCadastroPedido.ExcluirListaPedidoProduto(
@@ -143,7 +143,7 @@ end;
 
 procedure TControllerCadastroPedido.Rollback;
 begin
-  TConexao.GetConnection.RollbackRetaining;
+  TConexao.New.Rollback;
 end;
 
 end.

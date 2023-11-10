@@ -75,7 +75,7 @@ end;
 
 procedure TViewPesquisa.CriarGridePorClasse(AClasseEntidade: TClass);
 begin
-  FQuery := TConexao.GetQuery;
+  FQuery := TConexao.New.GetQuery;
   FDataSource.DataSet := FQuery;
   FQuery.Open(TUtilsEntidade.ObterSelectSql(TEntidadeClass(AClasseEntidade)));
 

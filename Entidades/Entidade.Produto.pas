@@ -19,15 +19,23 @@ type
       property Descricao: string read FDescricao write FDescricao;
       [TCampoDecimal('PRECO', 'Preço')]
       property Preco: Double read FPreco write FPreco;
-      constructor Create(Builder: IBuilderProduto); overload;
+
+      class function New: TProduto;
+      function Preencher(Builder: IBuilderProduto): TProduto;
   end;
 
 implementation
 
 { TProduto }
 
-constructor TProduto.Create(Builder: IBuilderProduto);
+class function TProduto.New: TProduto;
 begin
+  Result := Self.Create;
+end;
+
+function TProduto.Preencher(Builder: IBuilderProduto): TProduto;
+begin
+  Result := Self;
   Builder.SetID(FID)
     .SetDescricao(FDescricao)
     .SetPreco(FPreco);

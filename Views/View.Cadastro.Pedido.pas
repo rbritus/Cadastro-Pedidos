@@ -284,7 +284,7 @@ end;
 
 procedure TViewCadastroPedido.GravarPedido;
 begin
-  var Pedido := TPedido.Create(
+  var Pedido := TPedido.New.Preencher(
     TBuilderPedido.New.SetNumero(edtNumeroPedido.Text.ToInteger)
       .SetDataEmissao(edtDataEmissao.Date)
       .SetIdCliente(edtCodigoCliente.Text.ToInteger)
@@ -303,7 +303,7 @@ begin
     tabProdutos.First;
     while not tabProdutos.Eof do
     begin
-      var PedidoProduto := TPedidoProduto.Create(
+      var PedidoProduto := TPedidoProduto.New.Preencher(
         TBuilderPedidoProduto.New.SetID(tabProdutos.FieldByName('ID_PEDIDOPRODUTO').AsInteger)
           .SetNumeroPedido(edtNumeroPedido.Text.ToInteger)
           .SetIdProduto(tabProdutos.FieldByName('Codigo').AsInteger)

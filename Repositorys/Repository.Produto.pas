@@ -29,7 +29,7 @@ begin
     .Append('(DESCRICAO, PRECO) ')
     .Append('VALUES ')
     .Append('(:DESCRICAO, :PRECO);')
-    .Append(TConexao.SELECT_RECUPERACAO_ID);
+    .Append(TConexao.New.GetSqlRecuperaID);
 
   Result := SQL.ToString;
   SQL.DisposeOf;

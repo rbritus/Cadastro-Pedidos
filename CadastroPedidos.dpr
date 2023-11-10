@@ -32,7 +32,16 @@ uses
   Repository.Produto in 'Repositorys\Repository.Produto.pas',
   DAO.Produto in 'DAO\DAO.Produto.pas',
   Controller.View.Cadastro.Pedido in 'Controllers\Controller.View.Cadastro.Pedido.pas',
-  Utils.Entidade in 'Utils\Utils.Entidade.pas';
+  Utils.Entidade in 'Utils\Utils.Entidade.pas',
+  Excecao.Generic in 'Exceptions\Excecao.Generic.pas',
+  Excecao.InterfaceParse in 'Exceptions\Excecao.InterfaceParse.pas',
+  Excecao.AccessViolation in 'Exceptions\Excecao.AccessViolation.pas',
+  Excecao.ConvercaoDeTipos in 'Exceptions\Excecao.ConvercaoDeTipos.pas',
+  Excecao.DBX in 'Exceptions\Excecao.DBX.pas',
+  Excecao.DataBase in 'Exceptions\Excecao.DataBase.pas',
+  Excecao.MensagemPadrao in 'Exceptions\Excecao.MensagemPadrao.pas',
+  Conexao.MySql in 'Connection\Conexao.MySql.pas',
+  Conexao.SqLite in 'Connection\Conexao.SqLite.pas';
 
 {$R *.res}
 

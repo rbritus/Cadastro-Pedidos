@@ -27,7 +27,7 @@ uses
 
 function TDAOCliente.Insert(AEntidade: TCliente): Integer;
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryCliente.New.GetScriptInsert);
    Qry.ParamByName('NOME').AsString := AEntidade.Nome;
    Qry.ParamByName('CIDADE').AsString := AEntidade.Cidade;
@@ -39,7 +39,7 @@ end;
 
 procedure TDAOCliente.Update(AEntidade: TCliente);
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryCliente.New.GetScriptUpdate);
    Qry.ParamByName('ID').AsInteger := AEntidade.ID;
    Qry.ParamByName('NOME').AsString := AEntidade.Nome;
@@ -51,7 +51,7 @@ end;
 
 function TDAOCliente.Carregar(Id: Integer): TCliente;
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryCliente.New.GetScriptLoad);
    Qry.ParamByName('ID').AsInteger := Id;
    Qry.Open;
@@ -61,7 +61,7 @@ end;
 
 procedure TDAOCliente.Delete(AEntidade: TCliente);
 begin
-   var Qry := TConexao.GetConnection.GetQuery;
+   var Qry := TConexao.New.GetQuery;
    Qry.SQL.Add(TRepositoryCliente.New.GetScriptDelete);
    Qry.ParamByName('ID').AsInteger := AEntidade.ID;
    Qry.ExecSQL;
@@ -70,7 +70,7 @@ end;
 
 function TDAOCliente.GetListaEntidade: TObjectList<TCliente>;
 begin
-  var Qry := TConexao.GetConnection.GetQuery;
+  var Qry := TConexao.New.GetQuery;
   Qry.SQL.Add(TRepositoryCliente.New.GetScriptLoadList);
   Qry.Open;
   Result := TObjectList<TCliente>(TUtilsSerialize.DataSetToListaEntidade(TDataSet(Qry),TCliente));
@@ -84,7 +84,7 @@ end;
 
 function TDAOCliente.ObterListaComFiltro(ACondicaoSql: string): TObjectList<TCliente>;
 begin
-  var Qry := TConexao.GetConnection.GetQuery;
+  var Qry := TConexao.New.GetQuery;
   Qry.SQL.Add(TRepositoryCliente.New.GetScriptLoadFilter);
   Qry.MacroByName('MACRO').AsRaw := ACondicaoSql;
   Qry.Open;
